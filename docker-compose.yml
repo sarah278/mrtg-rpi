@@ -1,18 +1,9 @@
 version: "2"
 services:
    mrtg:
-      build: mrtg/
+      build: .
       container_name: mrtg
       image: ggosselin/mrtg:rpi
       volumes:
         - "/data/mrtg/:/home/mrtg/data"
       restart: always
-   mrtgweb:
-      build: web/
-      container_name: mrtgweb
-      image: ggosselin/mrtgweb:rpi
-      restart: always
-      volumes:
-       - "/data/mrtg:/data"
-      ports:
-       - "8082:80"
