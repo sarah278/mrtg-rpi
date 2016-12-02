@@ -10,6 +10,8 @@ RUN set -x \
 	&& chown -R mrtg:nogroup /home/mrtg \
         && rm -rf /var/cache/apk/* 
 
-COPY docker-entrypoint.sh /usr/local/bin/
+COPY	docker-entrypoint.sh \
+	generate-mrtg-config.sh \
+	/usr/local/bin/
 
 ENTRYPOINT ["docker-entrypoint.sh"]

@@ -1,20 +1,19 @@
 #!/bin/sh
 set -x
 
-#
-#	8:07 GMT (3 AM EST)
-#
+echo "Include: /home/mrtg/cfg/*.cfg" > /home/mrtg/mrtg.cfg
 
-cfgmaker \
-	--global 'WorkDir: /home/mrtg/data' \
-	--global 'Options[_]: bits,growright' \
-	--output /home/mrtg/cfg/mrtg.cfg \
-	--ifref=name \
-	--ifdesc=name \
-	public@192.168.8.1
+grep SG300 /usr/bin/cfgmaker || \
+	sed -i '/my $descr = $routers->{$router}{deviceinfo}{sysDescr};/a push @Variables, "ifAlias" if $descr =~ /SG300/;' /usr/bin/cfgmaker
 
-indexmaker /home/mrtg/cfg/mrtg.cfg --output /home/mrtg/data/index.html
+/usr/local/bin/generate-mrtg-config.sh 192.168.8.1 public
+echo "3 * * * * /usr/local/bin/generate-mrtg-config.sh 192.168.8.1 public" >> /tmp/crontab
 
-echo "0,5,10,15,20,25,30,35,40,45,50,55 * * * * /usr/bin/mrtg /home/mrtg/cfg/mrtg.cfg --logging /home/mrtg/logs/mrtg.log" | crontab -u mrtg -
+/usr/local/bin/generate-mrtg-config.sh 192.168.2.2 public
+echo "3 * * * * /usr/local/bin/generate-mrtg-config.sh 192.168.2.2 public" >> /tmp/crontab
+
+
+echo "0,5,10,15,20,25,30,35,40,45,50,55 * * * * /usr/bin/mrtg /home/mrtg/mrtg.cfg --logging /home/mrtg/logs/mrtg.log" >> /tmp/crontab
+cat /tmp/crontab | crontab -u mrtg -
 
 exec crond -l 2 -f
