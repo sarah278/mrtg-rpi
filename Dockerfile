@@ -1,4 +1,4 @@
-FROM hypriot/rpi-alpine-scratch
+FROM armhf/alpine:3.4
 
 RUN set -x \
         && apk update \

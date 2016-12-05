@@ -8,5 +8,3 @@ cfgmaker \
 	--ifref=name \
 	--ifdesc=alias \
 	$2@$1
-
-indexmaker /home/mrtg/cfg/$1.mrtg.cfg --output /home/mrtg/data/$1.html
