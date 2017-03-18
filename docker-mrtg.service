@@ -1,0 +1,12 @@
+[Unit]
+Description=MRTG container
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker run --rm --name mrtg -v /data/mrtg/:/home/mrtg/data -v /etc/localtime:/etc/localtime:ro ggosselin/mrtg:rpi
+ExecStop=/usr/bin/docker stop -t 2 mrtg
+
+[Install]
+WantedBy=default.target
