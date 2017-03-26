@@ -5,6 +5,6 @@ services:
       container_name: mrtg
       image: ggosselin/mrtg:rpi
       volumes:
-        - "/data/mrtg/:/home/mrtg/data"
+        - "/docker/data/volume/mrtg/:/home/mrtg/data"
         - "/etc/localtime:/etc/localtime:ro"
       restart: always
