@@ -1,5 +1,5 @@
-LABEL architecture="ARMv7"
 FROM armhf/alpine:3.5
+LABEL architecture="ARMv7"
 
 #
 #	cfgmaker doesn't distinguish between normal Cisco IOS and Cisco IOS on SG300.
