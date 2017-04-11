@@ -1,3 +1,4 @@
+LABEL architecture="ARMv7"
 FROM armhf/alpine:3.5
 
 #
