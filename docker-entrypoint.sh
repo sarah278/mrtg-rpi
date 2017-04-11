@@ -1,20 +1,40 @@
 #!/bin/sh
 set -x
 
-echo "Include: /home/mrtg/cfg/*.cfg" > /home/mrtg/mrtg.cfg
+#
+#	Read nodes.csv. For each line, parse out the
+#	nodename and nodesnmp fields. Execute cfgmaker
+#	for each node. Use grep for a simple report.
+#
 
-grep SG300 /usr/bin/cfgmaker || \
-	sed -i '/my $descr = $routers->{$router}{deviceinfo}{sysDescr};/a push @Variables, "ifAlias" if $descr =~ /SG300/;' /usr/bin/cfgmaker
+while IFS=',' read -r nodename nodesnmp
+do
 
-/usr/local/bin/generate-mrtg-config.sh 192.168.8.1 public
-/usr/local/bin/generate-mrtg-config.sh 192.168.2.2 public
+	#
+	#	Keep global options bits before output
+	#	or the max speed appears as bytes.
+	#
+	cfgmaker \
+		--global "Options[_]: bits,growright,logscale" \
+		--output /home/mrtg/cfg/$nodename.cfg \
+		--ifref=name \
+		--ifdesc=alias \
+		$nodesnmp \
+	2>/dev/null
 
+	#
+	#	So we can see in the docker logs if polling succeeded.
+	#
+	grep '^Title' /home/mrtg/cfg/$nodename.cfg
+
+done </home/mrtg/nodes.csv
+
+
+#
+#	Creates a simple static html page.
+#
 indexmaker /home/mrtg/mrtg.cfg --output /home/mrtg/data/index.html
-chown -R mrtg:nogroup /home/mrtg
 
-echo "3 * * * * /usr/local/bin/generate-mrtg-config.sh 192.168.8.1 public" >> /tmp/crontab
-echo "7 * * * * /usr/local/bin/generate-mrtg-config.sh 192.168.2.2 public" >> /tmp/crontab
-echo "0,5,10,15,20,25,30,35,40,45,50,55 * * * * /usr/bin/mrtg /home/mrtg/mrtg.cfg --logging /home/mrtg/logs/mrtg.log" >> /tmp/crontab
 
-cat /tmp/crontab | crontab -u mrtg -
-exec crond -l 2 -f
+echo "NOTE: Rateup warnings are normal the first time a target is polled."
+exec /usr/bin/mrtg /home/mrtg/mrtg.cfg
