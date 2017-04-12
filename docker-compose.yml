@@ -1,10 +1,11 @@
 version: "3.1"
 services:
    mrtg:
-      build: /docker/build/mrtg/rpi
+      build: /docker/build/mrtg
       container_name: mrtg
       image: registry.snafui.com:5000/mrtg:rpi
       volumes:
         - /etc/localtime:/etc/localtime:ro
+        - /etc/timezone:/etc/timezone:ro
         - /docker/data/config/mrtg/nodes.csv:/home/mrtg/nodes.csv:ro
         - /docker/data/volume/mrtg/:/home/mrtg/data
