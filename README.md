@@ -26,9 +26,12 @@ Mount mrtg-data to an NGINX container:
         - mrtg-data:/mnt/mrtg:ro
 
 and use a simple file in conf.d to display it:  
+
+~~~~
 server {
         server_name mrtg;
         root /mnt/mrtg;
         location / {
         }
 }
+~~~~
