@@ -26,6 +26,13 @@ distro1,public@10.119.9.20
 
 MRTG-data is a named volume where MRTG stores its polling data.
 
+Startup:  
+Upon startup the nodes.csv file is read and each node is queried by cfgmaker. A new ~/cfg/nodename.cfg file is created.
+A printout of active targets (interfaces) is shown after each cfgmaker run for debugging purposes. It can be seen with docker logs <containername>.
+After all node configs have been created, indexmaker is run to generate a static index.html file in ~/data/.
+MRTG is then launched in foreground mode. The default polling cycle if 5 minutes.
+MRTG data is stored in log format, not RRD.
+
 You need a web server for displaying the index.html and graphs. A simple NGINX install will do.
 
 Mount mrtg-data to an NGINX container:  
