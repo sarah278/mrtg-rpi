@@ -22,7 +22,8 @@ MRTG-data is a named volume where MRTG stores its polling data.
 You need a web server for displaying the index.html and graphs. A simple NGINX install will do.
 
 Mount mrtg-data to an NGINX container:  
-	- mrtg-data:/mnt/mrtg:ro 
+
+        - mrtg-data:/mnt/mrtg:ro
 
 and use a simple file in conf.d to display it:  
 server {
