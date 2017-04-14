@@ -11,8 +11,8 @@ RUN set -x \
 	&& adduser -S mrtg -h /home/mrtg -D -s /bin/ash \
 	&& sed -i '/my $descr = $routers->{$router}{deviceinfo}{sysDescr};/a push @Variables, "ifAlias" if $descr =~ /SG300/;' /usr/bin/cfgmaker
 
-COPY docker-entrypoint.sh /usr/local/bin/
-COPY mrtg.cfg /home/mrtg
+COPY files/docker-entrypoint.sh /usr/local/bin/
+COPY files/mrtg.cfg /home/mrtg
 
 USER mrtg
 
