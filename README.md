@@ -1,6 +1,6 @@
 # mrtg-rpi
 
-A simple MRTG container based on Alpine. The x86 tag is built for x86_64 using the official alpine image as a base. The rpi tag is for ARM using armhf/alpine as a base.
+A simple MRTG container based on Alpine. The x86 tag is built for x86_64 using the official alpine:3.5 image as a base. The rpi tag is for ARM using ggosselin/alpine-rpi:3.5 as a base.
 
 **Config**  
 To use this container, attach the following volumes:
