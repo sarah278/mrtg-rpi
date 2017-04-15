@@ -1,4 +1,4 @@
-FROM alpine:3.5
+FROM ggosselin/alpine-rpi:3.5
 
 #
 #	cfgmaker doesn't distinguish between normal Cisco IOS and Cisco IOS on SG300.
@@ -8,7 +8,7 @@ FROM alpine:3.5
 
 RUN set -x \
         && apk --no-cache add mrtg \
-	&& adduser -S mrtg -h /home/mrtg -D -s /bin/ash \
+	&& adduser -S mrtg -h /home/mrtg -D \
 	&& sed -i '/my $descr = $routers->{$router}{deviceinfo}{sysDescr};/a push @Variables, "ifAlias" if $descr =~ /SG300/;' /usr/bin/cfgmaker
 
 COPY files/docker-entrypoint.sh /usr/local/bin/

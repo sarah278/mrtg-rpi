@@ -1,9 +1,7 @@
 version: "3.1"
 services:
    mrtg:
-      build:
-        context: /docker/build/mrtg
-        dockerfile: Dockerfile.rpi
+      build: /docker/build/mrtg
       container_name: mrtg
       image: registry.snafui.com:5000/mrtg:rpi
       volumes:
