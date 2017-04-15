@@ -8,7 +8,7 @@ To use this container, attach the following volumes:
 ~~~~
         - /etc/localtime:/etc/localtime:ro  
         - /etc/timezone:/etc/timezone:ro  
-        - nodes.csv:/home/mrtg/nodes.csv:ro  
+        - nodes.csv:/home/mrtg/cfg/nodes.csv:ro  
         - mrtg-data:/home/mrtg/data  
 ~~~~
 

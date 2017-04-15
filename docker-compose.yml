@@ -7,5 +7,5 @@ services:
       volumes:
         - /etc/localtime:/etc/localtime:ro
         - /etc/timezone:/etc/timezone:ro
-        - /docker/data/config/mrtg/nodes.csv:/home/mrtg/nodes.csv:ro
+        - /docker/data/config/mrtg/nodes.csv:/home/mrtg/cfg/nodes.csv:ro
         - /docker/data/volume/mrtg/:/home/mrtg/data

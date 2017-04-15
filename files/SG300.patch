@@ -1,0 +1,14 @@
+--- /usr/bin/cfgmaker
++++ cfgmaker.SG300
+@@ -189,6 +189,11 @@
+         $descr =~ m/Catalyst/ ) {
+         push @Variables,  "vlanTrunkPortDynamicStatus";
+     }
++    if ($routers->{$router}{deviceinfo}{Vendor} eq 'cisco' &&
++        $descr =~ m/SG300/ ) {
++        push @Variables,  "ifAlias";
++    }
++
+     if ($descr =~ m/Passport-8610/ || $descr =~ m/MERS-8610/ ) {
+         push @Variables,  "ppPortName";
+     }

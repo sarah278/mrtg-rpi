@@ -27,7 +27,7 @@ do
 	#
 	grep '^Title' /home/mrtg/cfg/$nodename.cfg
 
-done </home/mrtg/nodes.csv
+done </home/mrtg/cfg/nodes.csv
 
 
 #
