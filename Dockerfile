@@ -17,6 +17,7 @@ RUN set -x \
 
 COPY files/mrtg.cfg /home/mrtg
 USER mrtg
+WORKDIR /home/mrtg
 
 RUN set -x \
 	&& mkdir -p /home/mrtg/cfg /home/mrtg/data \
