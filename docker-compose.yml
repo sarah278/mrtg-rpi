@@ -1,9 +1,9 @@
-version: "3.1"
+version: "3.2"
 services:
    mrtg:
-      build: /docker/build/mrtg
+      build: .
       container_name: mrtg
-      image: registry.snafui.com:5000/mrtg:rpi
+      image: registry.snafui.com:5000/mrtg:armhf
       volumes:
         - /etc/localtime:/etc/localtime:ro
         - /etc/timezone:/etc/timezone:ro
