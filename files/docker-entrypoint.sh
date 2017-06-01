@@ -17,7 +17,7 @@ do
 	cfgmaker \
 		--global "Options[_]: bits,growright,logscale" \
 		--output /home/mrtg/cfg/$nodename.cfg \
-		--ifref=name \
+		--ifref=name,nr \
 		--ifdesc=alias \
 		$nodesnmp \
 	2>/dev/null
