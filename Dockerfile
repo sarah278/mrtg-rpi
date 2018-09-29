@@ -1,4 +1,4 @@
-FROM registry.snafui.com:5000/alpine:3.5-armhf
+FROM arm32v6/alpine
 
 #
 #	Adding if statement to cfgmaker to detect Cisco SG300
