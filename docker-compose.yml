@@ -3,7 +3,7 @@ services:
   mrtg:
     build: .
     container_name: mrtg
-    image: registry.snafui.com:5000/mrtg:armhf
+    image: sk278/rpi-mrtg
     volumes:
      - /etc/localtime:/etc/localtime:ro
      - /etc/timezone:/etc/timezone:ro
